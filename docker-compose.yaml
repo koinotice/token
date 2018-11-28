@@ -1,0 +1,24 @@
+version: "3"
+services:
+  
+  token71an:
+    build: .
+    volumes:
+      - .:/usr/share/nginx/html
+    labels:
+      - "traefik.backend=token"
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:token.genv.com"
+      - "traefik.frontend.entryPoints=http"
+      #- "traefik.frontend.entryPoints=${FRONTEND_ENTRYPOINTS}"
+      - "traefik.docker.network=${GENV_DOCKER_NETWORK}"
+      - "traefik.tags=${TRAEFIK_DOCKER_TAGS}"
+    ports:
+      - 80
+      
+     
+
+networks:
+  default:
+    external:
+      name: ${GENV_DOCKER_NETWORK}
